@@ -1,0 +1,14 @@
+[
+  { dummyclient, [{host, "127.0.0.1"},
+                  {port, 7222},
+                  {msg_interval, 10000},
+                  {arrive_interval, 100},
+                  {max_conns, 50000},
+                  {report_step, 10},
+                  {monitor, 'dummymonitor@127.0.0.1'}
+  ]},
+  {kernel,
+   [{logger,
+     [{handler, default, logger_std_h,
+       #{config => #{file => "log/client.log"}, level => info}}]}]}
+].

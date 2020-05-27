@@ -1,0 +1,17 @@
+{application, dummysv,
+ [{description, "An OTP application"},
+  {vsn, "0.1.0"},
+  {registered, []},
+  {mod, { dummysv_app, []}},
+  {applications,
+   [kernel,
+    stdlib,
+    recon
+   ]},
+  {env,[]},
+  {modules, []},
+
+  {maintainers, []},
+  {licenses, []},
+  {links, []}
+ ]}.
