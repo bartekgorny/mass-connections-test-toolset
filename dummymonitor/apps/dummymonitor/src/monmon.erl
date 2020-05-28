@@ -89,6 +89,10 @@ init([]) ->
                      {stop, Reason :: term(), Reply :: term(), NewState :: #state{}} |
                      {stop, Reason :: term(), NewState :: #state{}}).
 handle_call(reset, _From, State) ->
+    case global:whereis_name(server_counter) of 
+        undefined -> ok;
+        Srv -> gen_server:cast(Srv, reset)
+    end,
     {reply, ok, State#state{nodes = #{}}};
 handle_call({register, Node}, _From, State) ->
     monitor_node(Node, true),
