@@ -34,6 +34,7 @@ loop(S) ->
             loop(S);
         {tcp_closed, S} ->
             gen_server:cast(counter, connection_closed),
+	    gen_tcp:close(S),
             ok
     end.
 
