@@ -1,0 +1,11 @@
+A simple test toolbox for testing large numbers of TCP connections.
+
+The server is based on MongooseIM TCP listener, with some simplifications.
+It is just an "echo server". Clients establish connections, each connection
+sending a "hey" message every minute or so.
+
+The way to use it is:
+1. Start dummysv on one EC2 instance
+2. Start dummymonitor on another EC2 instance, in foreground
+3. Create a launch template to start client EC2 instances, putting contents of user_data.sh as instance user data (startup code)
+4. Run monmon:print() on monitor console to see what is going on
