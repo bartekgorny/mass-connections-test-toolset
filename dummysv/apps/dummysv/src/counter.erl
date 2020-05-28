@@ -67,6 +67,7 @@ get() ->
     {stop, Reason :: term()} | ignore).
 init([]) ->
     timer:send_interval(1000, send_report),
+    global:register_name(server_counter, self()),
     {ok, #state{}}.
 
 %%--------------------------------------------------------------------
@@ -100,6 +101,8 @@ handle_call(_Request, _From, State) ->
     {noreply, NewState :: #state{}} |
     {noreply, NewState :: #state{}, timeout() | hibernate} |
     {stop, Reason :: term(), NewState :: #state{}}).
+handle_cast(reset, State) ->
+    {noreply, State#state{error = undefined}};
 handle_cast({error, E}, State) ->
     {noreply, State#state{error = E}};
 handle_cast(message_received, State) ->
