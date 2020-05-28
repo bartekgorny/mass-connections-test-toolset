@@ -188,7 +188,7 @@ nodestate(Node, Info, State) ->
 sum_connections(Nodes) ->
     lists:sum(lists:map(fun extract_count/1, maps:values(Nodes))).
 
-extract_count({running, X}) -> X;
+extract_count({running, X, _}) -> X;
 extract_count({over, _, X}) -> X;
 extract_count(_) -> 0.
 
