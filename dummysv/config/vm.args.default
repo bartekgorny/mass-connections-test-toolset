@@ -3,4 +3,17 @@
 -setcookie dummy_cookie
 
 +K true
-+A30
++A5
++P 10000000
+
+## Increase number of concurrent ports/sockets
+-env ERL_MAX_PORTS 25000000
+
+## Tweak GC to run more often
+-env ERL_FULLSWEEP_AFTER 2
+
+## With lager sasl reports are redundant so turn them off
+-sasl sasl_error_logger false
+
+-kernel inet_dist_listen_min 9100
+-kernel inet_dist_listen_max 9100
