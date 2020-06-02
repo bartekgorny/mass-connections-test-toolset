@@ -1,0 +1,17 @@
+---
+
+- name: "Wipe connection test ec2 instances"
+  hosts: "localhost"
+  become: no
+  gather_facts: no
+
+  tasks:
+
+    - name: Make ec2 instances absent
+      ec2_instance:
+        state: absent
+        filters:
+          instance-state-name: [ "running", "stopped" ]
+          "tag:TestId": "connections"
+          "tag:role": "client"
+

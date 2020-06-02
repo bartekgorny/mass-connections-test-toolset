@@ -9,3 +9,11 @@ The way to use it is:
 2. Start dummymonitor on another EC2 instance, in foreground
 3. Create a launch template to start client EC2 instances, putting contents of user_data.sh as instance user data (startup code)
 4. Run monmon:print() on monitor console to see what is going on
+5. To clean up, terminate all client instances (tagged role:client, you may use wipe_ctest.yml playbook), restart dummysv, run monmon:reset() on monitor
+
+Server and monitor exist on AWS (named testmonitor and testsrv), there also is a launch template connection_test_client.
+Limits on server are set using lim.yml playbook, which is an exact copy from scalability test toolset.
+
+If you modify server or monitor code, just run rebar3 compile in a respective directory and restart.
+
+If you want to modify client code, do it on test server and then run ./deploy.sh in dummyclient directory.

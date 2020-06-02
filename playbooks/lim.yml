@@ -1,0 +1,41 @@
+---
+# Exmaple: ansible-playbook mongooseim.yml -v -e test_id=2
+
+- name: "set system limits"
+  hosts: "tsv"
+  become: yes
+  gather_facts: no
+
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  tasks:
+
+    - name: set nofile limit in limit.conf
+      pam_limits:
+        domain: "ubuntu"
+        limit_type: "{{ item }}"
+        limit_item: nofile
+        value: "1000000"
+      loop:
+        - soft
+        - hard
+    
+    - name: increase limits in sysctl.conf
+      sysctl:
+        name: "{{ item.item }}"
+        value: "{{ item.limit }}"
+        sysctl_set: yes
+        state: present
+        reload: yes
+      loop:
+        - item: fs.file-max
+          limit: "10000001"
+        - item: net.ipv4.ip_local_port_range
+          limit: "1024 65535"
+        - item: net.ipv4.tcp_mem
+          limit: "16777216 16777216 16777216"
+        - item: net.ipv4.tcp_wmem
+          limit: "4096 87380 16777216"
+        - item: net.ipv4.tcp_rmem
+          limit: "4096 87380 16777216"
+
