@@ -57,7 +57,7 @@ start_client(Main, Opts) ->
     Host = proplists:get_value(host, Opts),
     Port = proplists:get_value(port, Opts),
     MsgInt = proplists:get_value(msg_interval, Opts),
-    case gen_tcp:connect(Host, Port, [{active, false}, {packet, 2}], 5000) of
+    case gen_tcp:connect(Host, Port, [{active, false}, {packet, 0}], 5000) of
         {ok, Sock} ->
             loop(Main, Sock, MsgInt);
         {error, E} ->

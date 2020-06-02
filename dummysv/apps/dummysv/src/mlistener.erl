@@ -46,7 +46,7 @@ start_link(PortIP, Module, Opts, SockOpts, Port, IPS) ->
 
 init({PortIP, Module, Opts, SockOpts, Port, IPS}) ->
     try
-        AcceptorsNum = proplists:get_value(acceptors_num, Opts, 10),
+        AcceptorsNum = proplists:get_value(acceptors_num, Opts, 100),
         ListenSocket = listen_tcp(PortIP, Module, SockOpts, Port, IPS),
         Children = [make_childspec({PortIP, I}, ListenSocket, Module, Opts)
                     || I <- lists:seq(1, AcceptorsNum)],
