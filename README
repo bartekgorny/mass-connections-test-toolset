@@ -17,3 +17,5 @@ Limits on server are set using lim.yml playbook, which is an exact copy from sca
 If you modify server or monitor code, just run rebar3 compile in a respective directory and restart.
 
 If you want to modify client code, do it on test server and then run ./deploy.sh in dummyclient directory.
+
+Alternative, ranch-based server - dummyranch. Its sys.config determines whether we use echo_protocol, which listens in passive mode, or echo_protocol_once which does {active, once} the way mongoose listener does.

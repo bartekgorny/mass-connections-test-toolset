@@ -1,0 +1,10 @@
+[
+  { dummyranch, [
+    {protocol, echo_protocol_once},
+    {monitor, 'dummymonitor@127.0.0.1'}
+  ]},
+  {kernel,
+   [{logger,
+     [{handler, default, logger_std_h,
+       #{config => #{file => "log/sv.log"}, level => info}}]}]}
+].
